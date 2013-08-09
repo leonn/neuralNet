@@ -2,8 +2,6 @@
 #define CONNECTION_H
 #include <iostream>
 
-#define RAND_MAX
-
 using namespace std;
 class Connection{ 
 	static double randomWeight(){
