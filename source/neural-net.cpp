@@ -1,7 +1,7 @@
 #include "net.h"
-
+#include <time.h>
 int main(){
-    
+    srand(time(NULL));
     //topology contains number of layers & number of neurons per layer
     //ex: {3,2,1}
     vector<unsigned int> topology;

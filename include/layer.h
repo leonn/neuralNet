@@ -6,7 +6,7 @@
 
 using namespace std;
 
-//class Neuron;
+class Neuron;
 
 typedef vector<Neuron> Layer;
 #endif

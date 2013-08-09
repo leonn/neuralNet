@@ -1,11 +1,21 @@
 #ifndef NEURON_H
 #define NEURON_H
+#include <iostream>
+#include "layer.h"
+#include "connection.h"
 
-class Neuron{
+using namespace std;
+class Neuron{ 
+
+	double outputValue;
+
+	//conections weights
+	vector<Connection> outputWeights;
+
 public:
-	Neuron();
+	Neuron(unsigned numberOutputs);
 	~Neuron();
-	/* data */
+
 };
 
 #endif

@@ -8,12 +8,15 @@ Net::Net(const vector<unsigned> &topology){
  	unsigned numberOfLayers = topology.size();
 
  	//create a new  Layer on each interation
- 	for (int layerNumber = 0; layerNumber < numberOfLayers; layerNumber++){
- 		m_layers.push_back(Layer());
+ 	for (unsigned layerNumber = 0; layerNumber < numberOfLayers; layerNumber++){
+ 		layers.push_back(Layer());
+
+ 		//number of outputs to a neuron
+		unsigned numberOutputs= (layerNumber==topology.size()-1) ? 0: topology[layerNumber+1] ;
 
  		// fill layer wiith neurons and  add bias neuron to the layer;
- 		for (int neuronNumber = 0; neuronNumber <= topology[numberOfLayers] ; neuronNumber++){
-			m_layers.back().push_back(Neuron());	
+ 		for (unsigned neuronNumber = 0; neuronNumber <= topology[layerNumber] ; neuronNumber++){
+			layers.back().push_back(Neuron(numberOutputs));	
  		}
  	}
 

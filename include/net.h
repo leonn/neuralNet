@@ -2,14 +2,15 @@
 #define NET_H
 
 #include <vector>
+#include <iostream>
 #include "layer.h"
 
 using namespace std;
 
 class Net{
 
-private:
-	vector<Layer> m_layers ;// mlayers[layerNumber][neuronNumber]
+
+	vector<Layer> layers ;// layers[layerNumber][neuronNumber]
 
 public:
 	Net();
