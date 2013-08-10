@@ -6,6 +6,12 @@ Authors
 -------
 	Leonn Paiva	 <master>
 
+USAGE
+-------
+	- ./neuralNet "Training Data File" > "Data Output"
+	- Generating Trainig data  (XOR) in data/xor
+		- ./xor "number of inputs for training" > "Training Data File"
+
 TODO
 -------
 	- Sigmoid transfer function
@@ -25,6 +31,6 @@ Changelog:
 		- improvement on algorithm
 	- 0.5 -
 		- ...
-		
+
 ---------
 

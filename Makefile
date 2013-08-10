@@ -46,12 +46,6 @@ CPPFLAGS=-Wall -g -W -pedantic -ansi -std=c++0x
 LIBS	:=
 LDFLAGS= $(LIBS)
 
-
-
-tests:
-	@$(MAKE) -f $(DATA)/Makefile
-	
-
 $(BUILD)/%.o:$(SOURCES)/%.cpp
 	@mkdir -p $(BUILD)
 	@echo building $^ ...
@@ -62,6 +56,10 @@ main:$(OFILES)
 	@echo linking ...
 	@$(LD) $(OFILES) $(CPPFLAGS) $(LDFLAGS) -o $(TARGET)
 	@echo "$(TARGET)-$(VERSION)"
+	@$(MAKE)  tests
+
+tests:
+	@$(MAKE) -f $(DATA)/Makefile
 
 # Cleanup
 clean:
