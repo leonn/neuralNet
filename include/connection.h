@@ -13,8 +13,6 @@ public:
     double deltaWeight;
 
 	Connection();
-	~Connection();
-
 };
 
 #endif

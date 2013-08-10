@@ -1,9 +1,5 @@
 #include "connection.h"
 Connection::Connection(){
-	this->weight=randomWeight();
-    //this->deltaWeight=;
+	weight=randomWeight();
 }
 
-Connection::~Connection(){
-
-}
