@@ -17,12 +17,12 @@ class Net{
 
 public:
 	Net(const vector<unsigned> &topology);
-	
+
 	//feedForward - operation to train the network
 	void feedForward(const vector<double> &inputValues);
 
-	// brackPropagation learning
-	void brackPropagation(const vector<double> &targetValues);
+	// backPropagation learning
+	void backPropagation(const vector<double> &targetValues);
 
 	void getResults(vector<double> &resultValues) const;
 

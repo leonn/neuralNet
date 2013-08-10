@@ -43,8 +43,8 @@ void Net::feedForward(const vector<double> &inputValues){
 
 }
 
-// brackPropagation learning
-void Net::brackPropagation(const vector<double> &targetValues){
+// backPropagation learning
+void Net::backPropagation(const vector<double> &targetValues){
 	
 	//-----Calculate overall net error (RMS-root mean square error - of output neuron errors)
 	Layer &outputLayer = layers.back();
