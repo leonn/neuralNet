@@ -60,7 +60,6 @@ void Net::backPropagation(const vector<double> &targetValues){
  	error/=outputLayer.size()-1; //get average error sqared
  	error=sqrt(error); // RMS
 
-
     //------ Implement a recent average measurement
     recentAverageError =
             (recentAverageError * recentAverageSmoothingFactor + error)
@@ -87,8 +86,8 @@ void Net::backPropagation(const vector<double> &targetValues){
   	for(unsigned layerNumber = layers.size() -1; layerNumber >0 ; layerNumber--){
 		Layer &layer = layers[layerNumber];	
 		Layer &prevLayer = layers[layerNumber-1];	
-		
-		for(unsigned n = 0; n < layer.size(); n++){
+
+		for(unsigned n = 0; n < layer.size() -1; n++){ 		
 			layer[n].updateInputWeights(prevLayer);
 		}
   	}
@@ -101,4 +100,8 @@ void Net::getResults(vector<double> &resultValues) const{
     for (unsigned n = 0; n < layers.back().size() - 1; n++) {
         resultValues.push_back(layers.back()[n].getOutputValue());
     }
+}
+
+double Net::getRecentAverageError(void) const { 
+	return recentAverageError; 
 }

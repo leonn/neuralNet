@@ -26,6 +26,8 @@ public:
 
 	void getResults(vector<double> &resultValues) const;
 
+	double getRecentAverageError() const;
+
 };
 
 #endif

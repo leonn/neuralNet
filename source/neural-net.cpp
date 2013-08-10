@@ -4,7 +4,7 @@
 
 void showVectorValues(string label, vector<double> &v){
     cout << label << " ";
-    for (unsigned i = 0; i < v.size(); ++i) {
+    for (unsigned i = 0; i < v.size(); i++) {
         cout << v[i] << " ";
     }
 
@@ -21,12 +21,12 @@ int main(int argc, char *argv[]){
 
     Net net(topology);
 
-    vector<double> inputVals, targetVals, resultVals;
+    vector<double> inputVals, targetValues, resultValues;
     int trainingPass = 0;
 
     while (!trainData.isEof()) {
-        ++trainingPass;
         cout << endl << "Pass " << trainingPass;
+        trainingPass++;
 
         // Get new input data and feed it forward:
         if (trainData.getNextInputs(inputVals) != topology[0]) {
@@ -36,15 +36,15 @@ int main(int argc, char *argv[]){
         net.feedForward(inputVals);
 
         // Collect the net's actual output results:
-        net.getResults(resultVals);
-        showVectorValues("Outputs:", resultVals);
+        net.getResults(resultValues);
+        showVectorValues("Outputs:", resultValues);
 
         // Train the net what the outputs should have been:
-        trainData.getTargetOutputs(targetVals);
-        showVectorValues("Targets:", targetVals);
-        assert(targetVals.size() == topology.back());
-
-        net.backPropagation(targetVals);
+        trainData.getTargetOutputs(targetValues);
+        showVectorValues("Targets:", targetValues);
+        assert(targetValues.size() == topology.back());
+ 
+        net.backPropagation(targetValues);
 
         // Report how well the training is working, average over recent samples:
         cout << "Net recent average error: "

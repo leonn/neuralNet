@@ -87,10 +87,11 @@ void Neuron::calculateHiddenGradients(const Layer &nextLayer){
 void Neuron::updateInputWeights(Layer &prevLayer){
  	// 	The weights to be updated are in the Connection container
     // in the neurons in the preceding layer
-
 	for(unsigned n = 0; n < prevLayer.size(); n++){
 		Neuron &neuron = prevLayer[n];
-		double oldDeltaWeight = neuron.outputWeights[index].deltaWeight;
+		Connection &conn=neuron.outputWeights[index];
+		
+		double oldDeltaWeight = conn.deltaWeight;
 		double newDeltaWeight =
                 // Individual input, magnified by the gradient and train rate:
                 eta
@@ -99,8 +100,9 @@ void Neuron::updateInputWeights(Layer &prevLayer){
                 // Also add momentum = a fraction of the previous delta weight;
                 + alpha
                 * oldDeltaWeight;
-        neuron.outputWeights[index].deltaWeight = newDeltaWeight;
-        neuron.outputWeights[index].weight += newDeltaWeight;
+
+        conn.deltaWeight = newDeltaWeight;
+        conn.weight += newDeltaWeight;
   	}
 
 }

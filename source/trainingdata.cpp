@@ -1,11 +1,14 @@
 #include "trainingdata.h"
 
-void TrainingData::getTopology(vector<unsigned> &topology)
-{
+bool TrainingData::isEof(){
+ return trainingDataFile.eof(); 
+}
+
+void TrainingData::getTopology(vector<unsigned> &topology){
     string line;
     string label;
 
-    getline(m_trainingDataFile, line);
+    getline(trainingDataFile, line);
     stringstream ss(line);
     ss >> label;
     if (this->isEof() || label.compare("topology:") != 0) {
@@ -21,17 +24,15 @@ void TrainingData::getTopology(vector<unsigned> &topology)
     return;
 }
 
-TrainingData::TrainingData(const string filename)
-{
-    m_trainingDataFile.open(filename.c_str());
+TrainingData::TrainingData(const string filename){
+    trainingDataFile.open(filename.c_str());
 }
 
-unsigned TrainingData::getNextInputs(vector<double> &inputVals)
-{
+unsigned TrainingData::getNextInputs(vector<double> &inputVals){
     inputVals.clear();
 
     string line;
-    getline(m_trainingDataFile, line);
+    getline(trainingDataFile, line);
     stringstream ss(line);
 
     string label;
@@ -46,12 +47,11 @@ unsigned TrainingData::getNextInputs(vector<double> &inputVals)
     return inputVals.size();
 }
 
-unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputVals)
-{
+unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputVals){
     targetOutputVals.clear();
 
     string line;
-    getline(m_trainingDataFile, line);
+    getline(trainingDataFile, line);
     stringstream ss(line);
 
     string label;
