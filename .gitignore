@@ -1,4 +1,6 @@
 build/
 data/xor/build
+data/xor/xor
+
 
 neuralNet

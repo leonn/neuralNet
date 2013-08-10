@@ -46,6 +46,12 @@ CPPFLAGS=-Wall -g -W -pedantic -ansi -std=c++0x
 LIBS	:=
 LDFLAGS= $(LIBS)
 
+
+
+tests:
+	@$(MAKE) -f $(DATA)/Makefile
+	
+
 $(BUILD)/%.o:$(SOURCES)/%.cpp
 	@mkdir -p $(BUILD)
 	@echo building $^ ...
@@ -62,6 +68,7 @@ clean:
 	@echo clean ...
 	@rm -rf $(BUILD)
 	@rm -f $(TARGET)
+	@$(MAKE) clean -f $(DATA)/Makefile 
 
 run:
 	@echo Running $(TARGET)
