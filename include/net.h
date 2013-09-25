@@ -19,7 +19,7 @@ public:
 	Net(const vector<unsigned> &topology);
 
 	//feedForward - operation to train the network
-	void feedForward(const vector<double> &inputValues);
+	void feedForward(vector<double> inputValues);
 
 	// backPropagation learning
 	void backPropagation(const vector<double> &targetValues);

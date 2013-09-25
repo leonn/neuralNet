@@ -21,35 +21,42 @@ int main(int argc, char *argv[]){
 
     Net net(topology);
 
+    vector<vector<double>> inputValsA, targetValuesA;
     vector<double> inputVals, targetValues, resultValues;
     int trainingPass = 0;
 
+    //Load trainning data from file
+
     while (!trainData.isEof()) {
-        cout << endl << "Pass " << trainingPass;
+    //    cout << endl << "Pass " << trainingPass;
         trainingPass++;
 
         // Get new input data and feed it forward:
-        if (trainData.getNextInputs(inputVals) != topology[0]) {
+        if (trainData.getNextInputs(inputVals) != topology[0]) 
             break;
-        }
-        showVectorValues(": Inputs:", inputVals);
-        net.feedForward(inputVals);
-
-        // Collect the net's actual output results:
-        net.getResults(resultValues);
-        showVectorValues("Outputs:", resultValues);
+        inputValsA.push_back(inputVals);
 
         // Train the net what the outputs should have been:
         trainData.getTargetOutputs(targetValues);
-        showVectorValues("Targets:", targetValues);
         assert(targetValues.size() == topology.back());
- 
-        net.backPropagation(targetValues);
-
-        // Report how well the training is working, average over recent samples:
-        cout << "Net recent average error: "
-                << net.getRecentAverageError() << endl;
+        targetValuesA.push_back(targetValues);
     }
 
-    cout << endl << "Done" << endl;
+    //run trainnig
+    for (int i = 0; i < trainingPass-1; i++){
+        //showVectorValues(": Inputs:", inputVals);
+        net.feedForward(inputValsA[i]);
+        
+        //showVectorValues("Targets:", targetValues);
+        
+        // Collect the net's actual output results:
+        net.getResults(resultValues);
+        //showVectorValues("Outputs:", resultValues);
+        
+        net.backPropagation(targetValuesA[i]);
+        
+        // Report how well the training is working, average over recent samples:
+        cout << i<<"\t"<<net.getRecentAverageError() << endl;
+    }
+    //cout << endl << "Done" << endl;
 }
