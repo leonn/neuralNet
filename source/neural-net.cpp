@@ -28,7 +28,6 @@ int main(int argc, char *argv[]){
     //Load trainning data from file
 
     while (!trainData.isEof()) {
-    //    cout << endl << "Pass " << trainingPass;
         trainingPass++;
 
         // Get new input data and feed it forward:
@@ -44,19 +43,20 @@ int main(int argc, char *argv[]){
 
     //run trainnig
     for (int i = 0; i < trainingPass-1; i++){
-        //showVectorValues(": Inputs:", inputVals);
+        
+        // Get new input data and feed it forward:
         net.feedForward(inputValsA[i]);
         
-        //showVectorValues("Targets:", targetValues);
-        
+                
         // Collect the net's actual output results:
         net.getResults(resultValues);
         //showVectorValues("Outputs:", resultValues);
         
+        // Train the net what the outputs should have been:
         net.backPropagation(targetValuesA[i]);
         
         // Report how well the training is working, average over recent samples:
-        cout << i<<"\t"<<net.getRecentAverageError() << endl;
+        cout <<net.getRecentAverageError() << endl;
     }
     //cout << endl << "Done" << endl;
 }
