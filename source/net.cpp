@@ -24,7 +24,7 @@ Net::Net(const vector<unsigned> &topology){
 }
 
 //feedForward - operation to train the network
-void Net::feedForward(vector<double> inputValues){
+void Net::feedForward(const vector<double> &inputValues){
 
 	assert(inputValues.size()==layers[0].size() - 1 && " the inputValues size needs to be the same of the first layer - bias");
 
