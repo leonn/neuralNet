@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cassert>
 #include "layer.h"
+#include <string.h>
 
 using namespace std;
 
@@ -12,11 +13,12 @@ class Net{
 
 	double error;
 	double recentAverageError;
-	double recentAverageSmoothingFactor;
+	int *numPatterns;
 	vector<Layer> layers ;// layers[layerNumber][neuronNumber]
 
 public:
-	Net(const vector<unsigned> &topology);
+	//Net(const vector<unsigned> &topology);
+	Net(const vector<unsigned> &topology,int *numPatterns);
 
 	//feedForward - operation to train the network
 	void feedForward(const vector<double> &inputValues);

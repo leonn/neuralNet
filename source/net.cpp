@@ -1,10 +1,10 @@
 #include "net.h"
 
 
-Net::Net(const vector<unsigned> &topology){
+Net::Net(const vector<unsigned> &topology,int *numPatterns){
 	// size
  	unsigned numberOfLayers = topology.size();
-
+ 	this->numPatterns=numPatterns;
  	//create a new  Layer on each interation
  	for (unsigned layerNumber = 0; layerNumber < numberOfLayers; layerNumber++){
  		layers.push_back(Layer());
@@ -56,17 +56,14 @@ void Net::backPropagation(const vector<double> &targetValues){
  		double delta= targetValues[n] - outputLayer[n].getOutputValue();
  		error+=delta*delta;
  	}
+ 	error*=0.5;
 
- 	error/=outputLayer.size()-1; //get average error sqared
- 	error=sqrt(error); // RMS
-
+ 	//error/=(* numPatterns); //get average error squared
+	//error/=outputLayer.size()-1; //get average error squared
     //------ Implement a recent average measurement
-    recentAverageError =
-            (recentAverageError * recentAverageSmoothingFactor + error)
-            / (recentAverageSmoothingFactor + 1.0);
+    recentAverageError = error;
 
     //------ Calculate output layer gradients
-
 	for(unsigned n = 0; n < outputLayer.size() -1; n++){
  		outputLayer[n].calculateOutputGradients(targetValues[n]);
   	}

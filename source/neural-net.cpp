@@ -19,14 +19,21 @@ int main(int argc, char *argv[]){
     vector<unsigned> topology;
     trainData.getTopology(topology);
 
-    Net net(topology);
 
     vector<vector<double>> inputValsA, targetValuesA;
     vector<double> inputVals, targetValues, resultValues;
+
+    double minError=atof(argv[2]);
+    double recentAverageError;
     int trainingPass = 0;
+    int epochs=0;
+    bool test=false;
+    int maxEpochs=atoi(argv[3]);
+
+    if(argc==5)
+            test=true;
 
     //Load trainning data from file
-
     while (!trainData.isEof()) {
         trainingPass++;
 
@@ -40,23 +47,41 @@ int main(int argc, char *argv[]){
         assert(targetValues.size() == topology.back());
         targetValuesA.push_back(targetValues);
     }
+    
+    Net net(topology,&trainingPass);
+    do{
+       
+       for (int i = 0; i < trainingPass; i++){        
+            // Get new input data and feed it forward:
+            net.feedForward(inputValsA[i]);        
+                    
+            // Collect the net's actual output results:
+            net.getResults(resultValues);
+          
+            // Train the net what the outputs should have been:
+            net.backPropagation(targetValuesA[i]);
+            
+            // Report how well the training is working, average over recent samples:
+            recentAverageError=net.getRecentAverageError();
+            if (!test)
+                cout <<recentAverageError<<endl;
+        }
+        
+        recentAverageError/=trainingPass;
 
-    //run trainnig
-    for (int i = 0; i < trainingPass-1; i++){
-        
-        // Get new input data and feed it forward:
-        net.feedForward(inputValsA[i]);
-        
-                
-        // Collect the net's actual output results:
-        net.getResults(resultValues);
-        //showVectorValues("Outputs:", resultValues);
-        
-        // Train the net what the outputs should have been:
-        net.backPropagation(targetValuesA[i]);
-        
-        // Report how well the training is working, average over recent samples:
-        cout <<net.getRecentAverageError() << endl;
+        //error/=(* numPatterns); //get average error squared
+        epochs++;
+    }while(recentAverageError>minError && epochs<=maxEpochs);
+
+    if (test){
+         for (int i = 0; i < trainingPass; i++){    
+        // Get new input data and feed it forward:][]
+            net.feedForward(inputValsA[i]);        
+            showVectorValues("Inputs:", inputValsA[i]); 
+                    
+            // Collect the net's actual output results:
+            net.getResults(resultValues);
+            showVectorValues("Outputs:", resultValues); 
+        }
     }
-    //cout << endl << "Done" << endl;
 }

@@ -32,12 +32,12 @@ double Neuron::transferFunctionTanHDerivative(double x){
 
 double Neuron::transferFunctionSig(double x){
 	// tanh - output range [-1.0..1.0]
-    return tanh(x);
+    return 1/(1+exp(-1*x));
 }
 
 double Neuron::transferFunctionSigDerivative(double x){
 	// tanh derivative aproximation
-	return 1.0 - x * x;
+	return exp(-1*x)/pow((1+exp(-1*x)),2);
 }
 
 double Neuron::transferFunctionStep(double x){
@@ -58,14 +58,14 @@ void Neuron::feedForward(const Layer &prevLayer){
 		sum+=prevLayer[n].getOutputValue() * prevLayer[n].outputWeights[index].weight;
 	}
 
-	// activate function or transfer /sig /gaussia /linear | degrau
+	// activate function or transfer /sig /gaussian /linear | steo
 	outputValue = Neuron::transferFunctionTanH(sum);
 
 }
 
 void Neuron::calculateOutputGradients(double targetValue){
 	double delta= targetValue - outputValue;
-	gradient = delta * Neuron::transferFunctionTanHDerivative(outputValue);
+	gradient =delta * Neuron::transferFunctionTanHDerivative(outputValue);
 }
 
 double Neuron::sumDOW(const Layer &nextLayer) const{
