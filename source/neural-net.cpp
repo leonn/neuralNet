@@ -2,13 +2,12 @@
 #include "trainingdata.h"
 #include <time.h>
 
-void showVectorValues(string label, vector<double> &v){
-    cout << label << " ";
+void showVectorValues(string label, vector<double> &v,ofstream &file){
+    file << label << " ";
     for (unsigned i = 0; i < v.size(); i++) {
-        cout << v[i] << " ";
+        file << v[i] << " ";
     }
-
-    cout << endl;
+    file << endl;
 }
 
 int main(int argc, char *argv[]){
@@ -18,7 +17,6 @@ int main(int argc, char *argv[]){
     // e.g., { 3, 2, 1 }
     vector<unsigned> topology;
     trainData.getTopology(topology);
-
 
     vector<vector<double>> inputValsA, targetValuesA;
     vector<double> inputVals, targetValues, resultValues;
@@ -30,9 +28,16 @@ int main(int argc, char *argv[]){
     bool test=false;
     int maxEpochs=atoi(argv[3]);
 
-    if(argc==5)
-            test=true;
+    ofstream trainingDataOutput;
+    ofstream testDataOutput;
 
+    if(argc==6){
+        test=true;
+        testDataOutput.open (argv[7]);
+    }
+    
+    trainingDataOutput.open (argv[5]);
+    
     //Load trainning data from file
     while (!trainData.isEof()) {
         trainingPass++;
@@ -63,25 +68,29 @@ int main(int argc, char *argv[]){
             
             // Report how well the training is working, average over recent samples:
             recentAverageError=net.getRecentAverageError();
-            if (!test)
-                cout <<recentAverageError<<endl;
+            
+            trainingDataOutput <<recentAverageError<<endl;
         }
         
         recentAverageError/=trainingPass;
 
         //error/=(* numPatterns); //get average error squared
         epochs++;
+
     }while(recentAverageError>minError && epochs<=maxEpochs);
+    
+    trainingDataOutput.close();
 
     if (test){
          for (int i = 0; i < trainingPass; i++){    
         // Get new input data and feed it forward:][]
             net.feedForward(inputValsA[i]);        
-            showVectorValues("Inputs:", inputValsA[i]); 
+            showVectorValues("Inputs:", inputValsA[i],testDataOutput); 
                     
             // Collect the net's actual output results:
             net.getResults(resultValues);
-            showVectorValues("Outputs:", resultValues); 
+            showVectorValues("Outputs:", resultValues,testDataOutput); 
         }
+        testDataOutput.close();
     }
 }
