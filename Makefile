@@ -40,7 +40,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES), -I$(CURDIR)/$(dir)) \
 					-I$(CURDIR)/$(BUILD)
 			
 # Flags
-CPPFLAGS=-Wall -g -W -pedantic -ansi -std=c++0x
+CPPFLAGS=-Wall -g -W -pedantic -ansi -std=c++0x -lutil -lboost_iostreams -lboost_system -lboost_filesystem
 
 # Linking flags
 LIBS	:=

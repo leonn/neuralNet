@@ -1,10 +1,10 @@
 #include "net.h"
 
 
-Net::Net(const vector<unsigned> &topology,int *numPatterns){
+Net::Net(const vector<unsigned> &topology){
 	// size
  	unsigned numberOfLayers = topology.size();
- 	this->numPatterns=numPatterns;
+ 	
  	//create a new  Layer on each interation
  	for (unsigned layerNumber = 0; layerNumber < numberOfLayers; layerNumber++){
  		layers.push_back(Layer());

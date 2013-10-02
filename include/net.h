@@ -13,12 +13,11 @@ class Net{
 
 	double error;
 	double recentAverageError;
-	int *numPatterns;
 	vector<Layer> layers ;// layers[layerNumber][neuronNumber]
 
 public:
 	//Net(const vector<unsigned> &topology);
-	Net(const vector<unsigned> &topology,int *numPatterns);
+	Net(const vector<unsigned> &topology);
 
 	//feedForward - operation to train the network
 	void feedForward(const vector<double> &inputValues);

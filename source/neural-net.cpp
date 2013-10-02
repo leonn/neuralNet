@@ -1,6 +1,7 @@
 #include "net.h"
 #include "trainingdata.h"
 #include <time.h>
+//#include "gnuplot-iostream.h"
 
 void showVectorValues(string label, vector<double> &v,ofstream &file){
     file << label << " ";
@@ -22,21 +23,33 @@ int main(int argc, char *argv[]){
     vector<double> inputVals, targetValues, resultValues;
 
     double minError=atof(argv[2]);
-    double recentAverageError;
     int trainingPass = 0;
     int epochs=0;
     bool test=false;
+    bool testFile=false;
     int maxEpochs=atoi(argv[3]);
 
     ofstream trainingDataOutput;
+    ofstream trainingDataGlobalOutput;
     ofstream testDataOutput;
+    TrainingData *testDataInput;
 
-    if(argc==6){
-        test=true;
-        testDataOutput.open (argv[7]);
-    }
     
-    trainingDataOutput.open (argv[5]);
+    trainingDataOutput.open(argv[4]);
+    trainingDataGlobalOutput.open(argv[5]);
+    
+    if(argc>6){
+        if(!strcmp(argv[6],"-t")){
+        testDataOutput.open(argv[7]);
+        test=true;
+        }
+        else if(!strcmp(argv[6],"-tf")){
+            testDataInput=new TrainingData(argv[7]);
+            testDataOutput.open(argv[8]);
+            testFile=true;
+        }
+    }
+    //Gnuplot gp;
     
     //Load trainning data from file
     while (!trainData.isEof()) {
@@ -53,8 +66,14 @@ int main(int argc, char *argv[]){
         targetValuesA.push_back(targetValues);
     }
     
-    Net net(topology,&trainingPass);
+    //gp << "set xrange [0:"<<maxEpochs*trainingPass<<"]\nset yrange [-1:2]\n";
+
+    Net net(topology);
+    double recentAverageError;
+    double globalError;
+    
     do{
+        globalError=0.0;
        
        for (int i = 0; i < trainingPass; i++){        
             // Get new input data and feed it forward:
@@ -68,29 +87,69 @@ int main(int argc, char *argv[]){
             
             // Report how well the training is working, average over recent samples:
             recentAverageError=net.getRecentAverageError();
-            
+            globalError+=recentAverageError;
             trainingDataOutput <<recentAverageError<<endl;
+            // gp << "plot " << recentAverageError<<endl;
         }
-        
-        recentAverageError/=trainingPass;
-
-        //error/=(* numPatterns); //get average error squared
+        globalError/=trainingPass;
+        trainingDataGlobalOutput <<globalError<<endl;
         epochs++;
 
-    }while(recentAverageError>minError && epochs<=maxEpochs);
+    }while(globalError>minError && epochs<=maxEpochs);
     
     trainingDataOutput.close();
+    trainingDataGlobalOutput.close();
 
     if (test){
          for (int i = 0; i < trainingPass; i++){    
-        // Get new input data and feed it forward:][]
+            // Get new input data and feed it forward:][]
             net.feedForward(inputValsA[i]);        
-            showVectorValues("Inputs:", inputValsA[i],testDataOutput); 
-                    
+            showVectorValues("Input:", inputValsA[i],testDataOutput); 
+
+            showVectorValues("Target Output:", targetValuesA[i],testDataOutput); 
+            
             // Collect the net's actual output results:
             net.getResults(resultValues);
-            showVectorValues("Outputs:", resultValues,testDataOutput); 
+            showVectorValues("Output:", resultValues,testDataOutput); 
         }
-        testDataOutput.close();
     }
+
+    if (testFile){
+        trainingPass=0;
+        //clear trainning data vectors
+        inputValsA.clear();
+        targetValuesA.clear();
+        inputVals.clear();
+        targetValues.clear();
+        resultValues.clear();
+
+        //Load trainning data from file
+        while (!testDataInput->isEof()) {
+            trainingPass++;
+
+            // Get new input data and feed it forward:
+            if (testDataInput->getNextInputs(inputVals) != topology[0]) 
+                break;
+            inputValsA.push_back(inputVals);
+
+            // Train the net what the outputs should have been:
+            testDataInput->getTargetOutputs(targetValues);
+            assert(targetValues.size() == topology.back());
+            targetValuesA.push_back(targetValues);
+        }
+
+        for (int i = 0; i < trainingPass; i++){    
+            // Get new input data and feed it forward:][]
+            net.feedForward(inputValsA[i]);        
+            showVectorValues("Input:", inputValsA[i],testDataOutput); 
+
+            showVectorValues("Target Output:", targetValuesA[i],testDataOutput); 
+            
+            // Collect the net's actual output results:
+            net.getResults(resultValues);
+            showVectorValues("Output:", resultValues,testDataOutput); 
+        }
+    }
+
+    testDataOutput.close();
 }
