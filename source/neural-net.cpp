@@ -17,7 +17,6 @@ int main(int argc, char *argv[]){
 
     // e.g., { 3, 2, 1 }
     vector<unsigned> topology;
-    trainData.getTopology(topology);
 
     vector<vector<double>> inputValsA, targetValuesA;
     vector<double> inputVals, targetValues, resultValues;
@@ -50,6 +49,11 @@ int main(int argc, char *argv[]){
         }
     }
     //Gnuplot gp;
+    double eta,momentum;
+
+    trainData.getTopology(topology);
+    trainData.getEta(eta);
+    trainData.getMomentum(momentum);
     
     //Load trainning data from file
     while (!trainData.isEof()) {
@@ -83,16 +87,16 @@ int main(int argc, char *argv[]){
             net.getResults(resultValues);
           
             // Train the net what the outputs should have been:
-            net.backPropagation(targetValuesA[i]);
+            net.backPropagation(targetValuesA[i],eta,momentum);
             
             // Report how well the training is working, average over recent samples:
             recentAverageError=net.getRecentAverageError();
             globalError+=recentAverageError;
             trainingDataOutput <<recentAverageError<<endl;
             // gp << "plot " << recentAverageError<<endl;
+            globalError/=(i+1);
+            trainingDataGlobalOutput <<globalError<<endl;
         }
-        globalError/=trainingPass;
-        trainingDataGlobalOutput <<globalError<<endl;
         epochs++;
 
     }while(globalError>minError && epochs<=maxEpochs);

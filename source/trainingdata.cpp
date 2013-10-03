@@ -24,6 +24,38 @@ void TrainingData::getTopology(vector<unsigned> &topology){
     return;
 }
 
+void TrainingData::getEta(double &eta){
+    string line;
+    string label;
+
+    getline(trainingDataFile, line);
+    stringstream ss(line);
+    ss >> label;
+    if (this->isEof() || label.compare("eta:") != 0) {
+        abort();
+    }
+
+    ss >> eta;
+
+    return;
+}
+
+void TrainingData::getMomentum(double &momentum){
+    string line;
+    string label;
+
+    getline(trainingDataFile, line);
+    stringstream ss(line);
+    ss >> label;
+    if (this->isEof() || label.compare("momentum:") != 0) {
+        abort();
+    }
+
+    ss >> momentum;
+
+    return;
+}
+
 TrainingData::TrainingData(const string filename){
     trainingDataFile.open(filename.c_str());
 }

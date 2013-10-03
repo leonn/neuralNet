@@ -1,7 +1,7 @@
 #include "neuron.h"
 
-double Neuron::eta = 0.6;    // overall net learning rate, [0.0..1.0]
-double Neuron::alpha = 0.5;   // momentum, multiplier of last deltaWeight, [0.0..1.0]
+//double Neuron::eta = 0.15;    // overall net learning rate, [0.0..1.0]
+//double Neuron::alpha = 0.5;   // momentum, multiplier of last deltaWeight, [0.0..1.0]
 
 Neuron::Neuron(unsigned numberOutputs, unsigned index){
 	for (unsigned c = 0; c < numberOutputs; c++){
@@ -84,7 +84,7 @@ void Neuron::calculateHiddenGradients(const Layer &nextLayer){
 	gradient = dow * Neuron::transferFunctionTanHDerivative(outputValue);
 }
 
-void Neuron::updateInputWeights(Layer &prevLayer){
+void Neuron::updateInputWeights(Layer &prevLayer, const double &eta, const double &alpha){
  	// 	The weights to be updated are in the Connection container
     // in the neurons in the preceding layer
 	for(unsigned n = 0; n < prevLayer.size(); n++){

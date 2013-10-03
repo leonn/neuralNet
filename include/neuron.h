@@ -18,12 +18,10 @@ class Neuron{
  	// 0.0 slow learner
  	// 0.2 medium learner
  	// 1.0 reckless learner
-	static double eta;  
 
 	// [0.0..n] multiplier of last weight change (momentum)
 	// 0.0 no momentum
 	// 0.5 moderate momentum
-    static double alpha; 
 
 	//conections weights
 	vector<Connection> outputWeights;
@@ -57,7 +55,7 @@ public:
 
 	void calculateOutputGradients(double targetValue);
 	void calculateHiddenGradients(const Layer &nextLayer);
-	void updateInputWeights(Layer &prevLayer);
+	void updateInputWeights(Layer &prevLayer, const double &eta, const double &alpha);
 	
 
 };

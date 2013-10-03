@@ -23,7 +23,7 @@ public:
 	void feedForward(const vector<double> &inputValues);
 
 	// backPropagation learning
-	void backPropagation(const vector<double> &targetValues);
+	void backPropagation(const vector<double> &targetValues,const double &eta ,const double &alpha);
 
 	void getResults(vector<double> &resultValues) const;
 

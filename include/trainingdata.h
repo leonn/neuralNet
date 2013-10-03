@@ -11,6 +11,8 @@ public:
     TrainingData(const string filename);
     bool isEof();
     void getTopology(vector<unsigned> &topology);
+    void getEta(double &eta);
+    void getMomentum(double &momentum);
 
     // Returns the number of input values read from the file:
     unsigned getNextInputs(vector<double> &inputVals);

@@ -44,7 +44,7 @@ void Net::feedForward(const vector<double> &inputValues){
 }
 
 // backPropagation learning
-void Net::backPropagation(const vector<double> &targetValues){
+void Net::backPropagation(const vector<double> &targetValues,const double &eta ,const double &alpha){
 	
 	//-----Calculate overall net error (RMS-root mean square error - of output neuron errors)
 	Layer &outputLayer = layers.back();
@@ -85,7 +85,7 @@ void Net::backPropagation(const vector<double> &targetValues){
 		Layer &prevLayer = layers[layerNumber-1];	
 
 		for(unsigned n = 0; n < layer.size() -1; n++){ 		
-			layer[n].updateInputWeights(prevLayer);
+			layer[n].updateInputWeights(prevLayer,eta,alpha);
 		}
   	}
 
