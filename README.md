@@ -8,7 +8,12 @@ Authors
 
 USAGE
 -------
-	- ./neuralNet "Training Data File" > "Data Output"
+	- Trainning Only
+		./neuralNet <Training Data File> <minimum error> <max epochs> <Data Output File> <Global Data Output File>
+	- Trainning & Test
+		./neuralNet <Training Data File> <minimum error> <max epochs> <Data Output File> <Global Data Output File> -t <Test Data Output File>
+	- Trainning & Test from File
+		./neuralNet <Training Data File> <minimum error> <max epochs> <Data Output File> <Global Data Output File> -tf <Test Data Input File> <Test Data Output File>
 	- Generating Trainig data  (XOR) in data/xor
 		- ./xor "number of inputs for training" > "Training Data File"
 

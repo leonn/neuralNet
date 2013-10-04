@@ -21,11 +21,11 @@ int main(int argc, char *argv[]){
     vector<vector<double>> inputValsA, targetValuesA;
     vector<double> inputVals, targetValues, resultValues;
 
-    double minError=atof(argv[2]);
     int trainingPass = 0;
     int epochs=0;
     bool test=false;
     bool testFile=false;
+    double minError=atof(argv[2]);
     int maxEpochs=atoi(argv[3]);
 
     ofstream trainingDataOutput;
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
     do{
         globalError=0.0;
        
-       for (int i = 0; i < trainingPass; i++){        
+        for (int i = 0; i < trainingPass; i++){        
             // Get new input data and feed it forward:
             net.feedForward(inputValsA[i]);        
                     
@@ -94,12 +94,12 @@ int main(int argc, char *argv[]){
             globalError+=recentAverageError;
             trainingDataOutput <<recentAverageError<<endl;
             // gp << "plot " << recentAverageError<<endl;
-            globalError/=(i+1);
-            trainingDataGlobalOutput <<globalError<<endl;
         }
+        globalError/=trainingPass;
+        trainingDataGlobalOutput <<globalError<<endl;
         epochs++;
 
-    }while(globalError>minError && epochs<=maxEpochs);
+    }while(globalError>minError && epochs<maxEpochs);
     
     trainingDataOutput.close();
     trainingDataGlobalOutput.close();
