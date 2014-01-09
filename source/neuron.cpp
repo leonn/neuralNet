@@ -59,13 +59,13 @@ void Neuron::feedForward(const Layer &prevLayer){
 	}
 
 	// activate function or transfer /sig /gaussian /linear | steo
-	outputValue = Neuron::transferFunctionTanH(sum);
+	outputValue = Neuron::transferFunctionSig(sum);
 
 }
 
 void Neuron::calculateOutputGradients(double targetValue){
 	double delta= targetValue - outputValue;
-	gradient =delta * Neuron::transferFunctionTanHDerivative(outputValue);
+	gradient =delta * Neuron::transferFunctionSigDerivative(outputValue);
 }
 
 double Neuron::sumDOW(const Layer &nextLayer) const{
