@@ -19,9 +19,12 @@ USAGE
 
 TODO
 -------
-	- Sigmoid transfer function
-	- Gaussian transfer function
-	- pendigits test
+	[X] Sigmoid transfer function
+	[ ] Gaussian transfer function
+	[X] Pendigits test
+	[ ] Export network weights
+	[ ] Import network weights
+	[ ] Tests results analisis
 
 
 Changelog:
