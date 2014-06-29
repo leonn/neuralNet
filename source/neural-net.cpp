@@ -11,6 +11,10 @@ void showVectorValues(string label, vector<double> &v,ofstream &file){
     file << endl;
 }
 
+double round(double f,double pres){
+        return (double) (floor(f*(1.0f/pres) + 0.5)/(1.0f/pres));
+}
+
 int main(int argc, char *argv[]){
     srand(time(NULL));
     TrainingData trainData(argv[1]);
@@ -99,7 +103,7 @@ int main(int argc, char *argv[]){
         trainingDataGlobalOutput <<globalError<<endl;
         epochs++;
 
-    }while(globalError>minError && epochs<maxEpochs);
+    }while(round(globalError,minError)>minError && epochs<maxEpochs);
     
     trainingDataOutput.close();
     trainingDataGlobalOutput.close();
