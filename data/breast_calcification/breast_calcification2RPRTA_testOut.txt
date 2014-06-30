@@ -1,0 +1,36 @@
+Input: 137.75 36 
+Target Output: 0 
+Output: 0.0942227 
+Input: 11.38 9 
+Target Output: 1 
+Output: 0.945853 
+Input: 48.38 21 
+Target Output: 0 
+Output: 0.0942227 
+Input: 11.5 10 
+Target Output: 1 
+Output: 0.945853 
+Input: 46.5 22 
+Target Output: 0 
+Output: 0.0942227 
+Input: 22.88 16 
+Target Output: 1 
+Output: 0.945853 
+Input: 44.38 19 
+Target Output: 0 
+Output: 0.0942227 
+Input: 55 22 
+Target Output: 0 
+Output: 0.0942227 
+Input: 6.38 5 
+Target Output: 1 
+Output: 0.945853 
+Input: 42.63 19 
+Target Output: 0 
+Output: 0.0942227 
+Input: 7.25 6 
+Target Output: 1 
+Output: 0.945853 
+Input: 53.5 20 
+Target Output: 0 
+Output: 0.0942227 

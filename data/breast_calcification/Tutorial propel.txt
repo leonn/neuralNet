@@ -1,0 +1,7 @@
+para fazer engenharia reversa deve-se
+ir até pasta em que o propel foi instalado(Na minha máquina irei fazer um cd C:php5/pear/data/propel_generator)
+Comando para engenharia reversa: propel-gen (o diretório que será gerado o build) reverse
+no meu caso: propel-gen C:\wamp\www\portal_intranet_2010\portal\www\modules\ouvidoria_fc reverse
+Isso gera um novo schema da base de dados
+
+após a engenharia reversa é realizado o build para gerar as classe com o comando: propel-gen C:\wamp\www\portal_intranet_2010\portal\www\modules\ouvidoria_fc
