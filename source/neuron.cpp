@@ -10,6 +10,14 @@ Neuron::Neuron(unsigned numberOutputs, unsigned index){
 	this->index=index;
 }
 
+Neuron::Neuron(unsigned numberOutputs, unsigned index,  const string &transferFunction){
+	for (unsigned c = 0; c < numberOutputs; c++){ 
+		outputWeights.push_back(Connection());
+	}
+	this->index=index;
+	this->transferFunction=transferFunction;
+}
+
 void  Neuron::setOutputValue(double value) {
   outputValue = value; 
 }
@@ -58,16 +66,20 @@ void Neuron::feedForward(const Layer &prevLayer){
 		sum+=prevLayer[n].getOutputValue() * prevLayer[n].outputWeights[index].weight;
 	}
 
-	// activate function or transfer /sig /gaussian /linear | steo
-	//outputValue = Neuron::transferFunctionSig(sum);
-	outputValue = Neuron::transferFunctionTanH(sum);
+	// activate function or transfer /sig /gaussian /linear/ step
+	if (this->transferFunction=="th")
+		outputValue = Neuron::transferFunctionTanH(sum);
+	else if (this->transferFunction=="sig")
+		outputValue = Neuron::transferFunctionSig(sum);
 
 }
 
 void Neuron::calculateOutputGradients(double targetValue){
 	double delta= targetValue - outputValue;
-	//gradient =delta * Neuron::transferFunctionSigDerivative(outputValue);
-	gradient =delta * Neuron::transferFunctionTanHDerivative(outputValue);
+	if (this->transferFunction=="th")
+		gradient =delta * Neuron::transferFunctionTanHDerivative(outputValue);
+ 	else if (this->transferFunction=="sig")
+		gradient =delta * Neuron::transferFunctionSigDerivative(outputValue);
 }
 
 double Neuron::sumDOW(const Layer &nextLayer) const{

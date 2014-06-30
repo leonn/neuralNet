@@ -17,7 +17,7 @@ class Net{
 
 public:
 	//Net(const vector<unsigned> &topology);
-	Net(const vector<unsigned> &topology);
+	Net(const vector<unsigned> &topology,const string &transferFunction);
 
 	//feedForward - operation to train the network
 	void feedForward(const vector<double> &inputValues);

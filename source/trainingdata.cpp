@@ -40,6 +40,22 @@ void TrainingData::getEta(double &eta){
     return;
 }
 
+void TrainingData::getTransferFunction(string &transferFunction){
+    string line;
+    string label;
+
+    getline(trainingDataFile, line);
+    stringstream ss(line);
+    ss >> label;
+    if (this->isEof() || label.compare("transfer_function:") != 0) {
+        abort();
+    }
+
+    ss >> transferFunction;
+
+    return;
+}
+
 void TrainingData::getMomentum(double &momentum){
     string line;
     string label;

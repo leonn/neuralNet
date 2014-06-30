@@ -1,7 +1,7 @@
 #include "net.h"
 
 
-Net::Net(const vector<unsigned> &topology){
+Net::Net(const vector<unsigned> &topology,const string &transferFunction){
 	// size
  	unsigned numberOfLayers = topology.size();
  	
@@ -14,7 +14,7 @@ Net::Net(const vector<unsigned> &topology){
 
  		// fill layer wiith neurons and  add bias neuron to the layer;
  		for (unsigned neuronNumber = 0; neuronNumber <= topology[layerNumber] ; neuronNumber++){
-			layers.back().push_back(Neuron(numberOutputs,neuronNumber));	
+			layers.back().push_back(Neuron(numberOutputs,neuronNumber,transferFunction));	
  		}
  	}
 

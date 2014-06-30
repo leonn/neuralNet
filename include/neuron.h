@@ -12,6 +12,8 @@ class Neuron{
 	
 	double gradient;
 
+	string transferFunction;
+
 	unsigned index;
  	
  	// [0.0..1.0] overall net training rate
@@ -46,6 +48,8 @@ class Neuron{
 
 public:
 	Neuron(unsigned numberOutputs, unsigned index);
+
+	Neuron(unsigned numberOutputs, unsigned index, const string &transferFunction);
 
 	void setOutputValue(double value);
 

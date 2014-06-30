@@ -13,6 +13,7 @@ public:
     void getTopology(vector<unsigned> &topology);
     void getEta(double &eta);
     void getMomentum(double &momentum);
+    void getTransferFunction(string &transferFunction);
 
     // Returns the number of input values read from the file:
     unsigned getNextInputs(vector<double> &inputVals);

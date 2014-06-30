@@ -11,6 +11,14 @@ void showVectorValues(string label, vector<double> &v,ofstream &file){
     file << endl;
 }
 
+void showTestVectorValues(string label, vector<double> &v,ofstream &file){
+    file << label << " ";
+    for (unsigned i = 0; i < v.size(); i++) {
+        file << v[i] <<" : "<<round(v[i]) << " ";
+    }
+    file << endl;
+}
+
 double round(double f,double pres){
         return (double) (floor(f*(1.0f/pres) + 0.5)/(1.0f/pres));
 }
@@ -54,10 +62,12 @@ int main(int argc, char *argv[]){
     }
     //Gnuplot gp;
     double eta,momentum;
+    string transferFunction;
 
     trainData.getTopology(topology);
     trainData.getEta(eta);
     trainData.getMomentum(momentum);
+    trainData.getTransferFunction(transferFunction);
     
     //Load trainning data from file
     while (!trainData.isEof()) {
@@ -76,7 +86,7 @@ int main(int argc, char *argv[]){
     
     //gp << "set xrange [0:"<<maxEpochs*trainingPass<<"]\nset yrange [-1:2]\n";
 
-    Net net(topology);
+    Net net(topology,transferFunction);
     double recentAverageError;
     double globalError;
     
@@ -118,7 +128,7 @@ int main(int argc, char *argv[]){
             
             // Collect the net's actual output results:
             net.getResults(resultValues);
-            showVectorValues("Output:", resultValues,testDataOutput); 
+            showTestVectorValues("Output:", resultValues,testDataOutput); 
         }
     }
 
