@@ -24,7 +24,7 @@ TODO
 	[X] Pendigits test
 	[ ] Export network weights
 	[ ] Import network weights
-	[ ] Tests results analisis
+	[X] Tests results analisis
 
 
 Changelog:
