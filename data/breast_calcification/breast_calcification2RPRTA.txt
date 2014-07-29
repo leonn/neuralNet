@@ -1,5 +1,5 @@
 topology: 2 3 1
-eta: 0.65
+eta: 0.8
 momentum: 0.45
 transfer_function: th
 in: 23.25 16.00

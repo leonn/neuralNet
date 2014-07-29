@@ -24,6 +24,8 @@ double round(double f,double pres){
 }
 
 int main(int argc, char *argv[]){
+    cout<<argc<<endl;
+    return 0;
     srand(time(NULL));
     TrainingData trainData(argv[1]);
 
@@ -124,7 +126,7 @@ int main(int argc, char *argv[]){
             net.feedForward(inputValsA[i]);        
             showVectorValues("Input:", inputValsA[i],testDataOutput); 
 
-            showVectorValues("Target Output:", targetValuesA[i],testDataOutput); 
+            showVectorValues("Target_Output:", targetValuesA[i],testDataOutput); 
             
             // Collect the net's actual output results:
             net.getResults(resultValues);
@@ -161,7 +163,7 @@ int main(int argc, char *argv[]){
             net.feedForward(inputValsA[i]);        
             showVectorValues("Input:", inputValsA[i],testDataOutput); 
 
-            showVectorValues("Target Output:", targetValuesA[i],testDataOutput); 
+            showVectorValues("Target_Output:", targetValuesA[i],testDataOutput); 
             
             // Collect the net's actual output results:
             net.getResults(resultValues);
