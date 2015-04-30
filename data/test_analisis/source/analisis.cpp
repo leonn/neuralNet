@@ -12,13 +12,13 @@ double round(double f,double pres){
 
 int main(int argc, char const *argv[]){
 	ifstream testFile;
-	int tests_cases, success=0;
+	int tests_cases=0, success=0;
 
 	testFile.open(argv[1]);
 
 	stringstream ss;
 	while (!testFile.eof()) {
-        
+
 	 	string line;
 	    string label;
 	    int target;
@@ -33,9 +33,9 @@ int main(int argc, char const *argv[]){
 	    if (label.compare("Target_Output:") != 0) {
 	        abort();
 	    }
-	    
+
 	    ss >> target;
-		
+
 		getline(testFile, line);
 		ss.str(line);
 	    ss >> label;
@@ -43,11 +43,11 @@ int main(int argc, char const *argv[]){
 	        abort();
 	    }
 	    ss >> output;
-	    
+
 		output=sqrt(output*output);
 		if (target==(int)round(output,1))
 	    	success++;
-	    
+
 	    tests_cases++;
     }
     cout<<success<<" of "<<tests_cases<<endl;

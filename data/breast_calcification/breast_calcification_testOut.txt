@@ -1,30 +1,30 @@
 Input: 62.13 25 
-Target Output: 0 
-Output: 0.027645 
+Target_Output: 0 
+Output: 0.229048 
 Input: 48.38 21 
-Target Output: 0 
-Output: 0.027645 
+Target_Output: 0 
+Output: 0.229048 
 Input: 11.38 9 
-Target Output: 1 
-Output: 0.749583 
+Target_Output: 1 
+Output: 0.982822 
 Input: 3 3 
-Target Output: 1 
-Output: 0.749583 
+Target_Output: 1 
+Output: 0.982822 
 Input: 46.5 22 
-Target Output: 0 
-Output: 0.027645 
+Target_Output: 0 
+Output: 0.229048 
 Input: 95.5 32 
-Target Output: 0 
-Output: 0.0841636 
+Target_Output: 0 
+Output: 0.229048 
 Input: 11.5 10 
-Target Output: 1 
-Output: 0.749583 
+Target_Output: 1 
+Output: 0.982822 
 Input: 6 6 
-Target Output: 1 
-Output: 0.749583 
+Target_Output: 1 
+Output: 0.982822 
 Input: 44.38 19 
-Target Output: 0 
-Output: 0.027645 
+Target_Output: 0 
+Output: 0.229048 
 Input: 22.88 16 
-Target Output: 1 
-Output: 0.749583 
+Target_Output: 1 
+Output: 0.982822 

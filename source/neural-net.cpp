@@ -24,8 +24,6 @@ double round(double f,double pres){
 }
 
 int main(int argc, char *argv[]){
-    cout<<argc<<endl;
-    return 0;
     srand(time(NULL));
     TrainingData trainData(argv[1]);
 

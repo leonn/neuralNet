@@ -9,6 +9,9 @@ int main(int argc, char const *argv[]){
 	//cout << inputs_number<<argc<<endl;
 
 	cout<<"topology: 2 4 1"<<endl;
+	cout << "eta: 0.8" << endl;
+	cout << "momentum: 0.45" << endl;
+	cout << "transfer_function: th" << endl;
 	for (int i = 0; i < inputs_number; i++){
 		int n1= (int)(2.0*rand() / double(RAND_MAX));
 		int n2= (int)(2.0*rand() / double(RAND_MAX));
