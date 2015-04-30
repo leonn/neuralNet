@@ -15,7 +15,9 @@ USAGE
 	- Trainning & Test from File
 		./neuralNet <Training Data File> <minimum error> <max epochs> <Data Output File> <Global Data Output File> -tf <Test Data Input File> <Test Data Output File>
 	- Generating Trainig data  (XOR) in data/xor
-		- ./xor "number of inputs for training" > "Training Data File"
+		./data/xor/xor "number of inputs for training" > "Training Data File"
+	- Result test analisis
+		./data/test_analisis/test_analisis <Test Data Output File>
 
 TODO
 -------
@@ -24,7 +26,7 @@ TODO
 	[X] Pendigits test
 	[ ] Export network weights
 	[ ] Import network weights
-	[X] Tests results analisis
+	[X] Result test analisis
 
 
 Changelog:
