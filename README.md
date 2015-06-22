@@ -20,14 +20,13 @@ USAGE
 		./data/test_analisis/test_analisis <Test Data Output File>
 
 TODO
--------
-	[X] Sigmoid transfer function
-	[ ] Gaussian transfer function
-	[X] Pendigits test
-	[ ] Export network weights
-	[ ] Import network weights
-	[X] Result test analisis
-
+----------
+- [x] Sigmoid transfer function
+- [x] Gaussian transfer function
+- [x] Pendigits test
+- [ ] Export network weights
+- [ ] Import network weights
+- [x] Result test analisis
 
 Changelog:
 ----------
