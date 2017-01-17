@@ -1,12 +1,30 @@
-Input: 1 0 
-Target Output: 0 
-Output: 0.0406666 
-Input: 1 1 
-Target Output: 1 
-Output: 0.946442 
-Input: 0 0 
-Target Output: 1 
-Output: 0.969712 
 Input: 0 1 
-Target Output: 0 
-Output: 0.039287 
+Target_Output: 1 
+Output: 0.880351 : 1 
+Input: 1 0 
+Target_Output: 1 
+Output: 0.946894 : 1 
+Input: 1 1 
+Target_Output: 0 
+Output: 0.00696734 : 0 
+Input: 1 1 
+Target_Output: 0 
+Output: 0.00696734 : 0 
+Input: 1 1 
+Target_Output: 0 
+Output: 0.00696734 : 0 
+Input: 0 0 
+Target_Output: 0 
+Output: 0.0584633 : 0 
+Input: 1 1 
+Target_Output: 0 
+Output: 0.00696734 : 0 
+Input: 1 0 
+Target_Output: 1 
+Output: 0.946894 : 1 
+Input: 1 1 
+Target_Output: 0 
+Output: 0.00696734 : 0 
+Input: 1 1 
+Target_Output: 0 
+Output: 0.00696734 : 0 

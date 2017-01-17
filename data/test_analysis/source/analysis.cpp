@@ -52,6 +52,6 @@ int main(int argc, char const *argv[]){
     }
     cout<<success<<" of "<<tests_cases<<endl;
 
-    cout<<"Acuracy = "<<((double)success/(double)tests_cases)*100<<"%"<<endl;
+    cout<<"Accuracy = "<<((double)success/(double)tests_cases)*100<<"%"<<endl;
 	return 0;
 }

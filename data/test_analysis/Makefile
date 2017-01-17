@@ -4,25 +4,25 @@ MINOR_VERSION=1
 MICRO_VERSION=0
 VERSION=$(MAJOR_VERSION).$(MINOR_VERSION).$(MICRO_VERSION)
 
-BUILD		:=	build
-SOURCES		:=	source
-DATA		:=	data
-INCLUDES	:=	include
+BUILD	  :=  build
+SOURCES     :=  source
+DATA        :=  data
+INCLUDES    :=  include
 
 #Target name
-TARGET		:=	$(notdir $(CURDIR))
+TARGET      :=  $(notdir $(CURDIR))
 
 #---------------------------------------------------------------------------------
 # automatically build a list of object files for our project
 #---------------------------------------------------------------------------------
-CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
-CPPFILES	:=  $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
+CFILES      :=  $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
+CPPFILES    :=  $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 
 # Object files
-export OFILES	:=	 $(addprefix $(BUILD)/,$(CPPFILES:.cpp=.o))			
+export OFILES   :=   $(addprefix $(BUILD)/,$(CPPFILES:.cpp=.o))         
 
-					
-CPPFILES	:=   $(addprefix $(SOURCES)/,$(CPPFILES))
+                    
+CPPFILES    :=   $(addprefix $(SOURCES)/,$(CPPFILES))
 
 
 #---------------------------------------------------------------------------------
@@ -31,19 +31,19 @@ CPPFILES	:=   $(addprefix $(SOURCES)/,$(CPPFILES))
 
 
 # Compiler
-export LD	:=	$(CXX)
+export LD   :=  $(CXX)
 
 #---------------------------------------------------------------------------------
 # build a list of include paths
 #---------------------------------------------------------------------------------
-export INCLUDE	:=	$(foreach dir,$(INCLUDES), -I$(CURDIR)/$(dir)) \
-					-I$(CURDIR)/$(BUILD)
-			
+export INCLUDE  :=  $(foreach dir,$(INCLUDES), -I$(CURDIR)/$(dir)) \
+                    -I$(CURDIR)/$(BUILD)
+            
 # Flags
 CPPFLAGS=-Wall -g -W -pedantic -ansi -std=c++0x
 
 # Linking flags
-LIBS	:=
+LIBS    :=
 LDFLAGS= $(LIBS)
 
 $(BUILD)/%.o:$(SOURCES)/%.cpp
@@ -62,10 +62,6 @@ clean:
 	@echo clean ...
 	@rm -rf $(BUILD)
 	@rm -f $(TARGET)
-
-run:
-	@echo Running $(TARGET)
-	@./$(TARGET)
 
 install:
 	@sudo mkdir -p /opt/$(TARGET)
