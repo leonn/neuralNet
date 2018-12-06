@@ -4,7 +4,7 @@
 Net::Net(const vector<unsigned> &topology,const string &transferFunction){
 	// size
  	unsigned numberOfLayers = topology.size();
- 	
+
  	//create a new  Layer on each interation
  	for (unsigned layerNumber = 0; layerNumber < numberOfLayers; layerNumber++){
  		layers.push_back(Layer());
@@ -14,7 +14,7 @@ Net::Net(const vector<unsigned> &topology,const string &transferFunction){
 
  		// fill layer wiith neurons and  add bias neuron to the layer;
  		for (unsigned neuronNumber = 0; neuronNumber <= topology[layerNumber] ; neuronNumber++){
-			layers.back().push_back(Neuron(numberOutputs,neuronNumber,transferFunction));	
+			layers.back().push_back(Neuron(numberOutputs,neuronNumber,transferFunction));
  		}
  	}
 
@@ -34,9 +34,9 @@ void Net::feedForward(const vector<double> &inputValues){
 
 	//forward propagation
  	//loop each layer and each neuron inside the layer
- 	for (unsigned layerNumber = 1; layerNumber < layers.size(); layerNumber++){ 	
+ 	for (unsigned layerNumber = 1; layerNumber < layers.size(); layerNumber++){
  		Layer &prevLayer = layers[layerNumber-1];
- 		for (unsigned n = 0; n < layers[layerNumber].size(); n++){ 	
+ 		for (unsigned n = 0; n < layers[layerNumber].size(); n++){
  			layers[layerNumber][n].feedForward(prevLayer);
  		}
  	}
@@ -45,10 +45,10 @@ void Net::feedForward(const vector<double> &inputValues){
 
 // backPropagation learning
 void Net::backPropagation(const vector<double> &targetValues,const double &eta ,const double &alpha){
-	
+
 	//-----Calculate overall net error (RMS-root mean square error - of output neuron errors)
 	Layer &outputLayer = layers.back();
-	
+
 	//overwall net error
 	error=0.0;
 
@@ -70,9 +70,9 @@ void Net::backPropagation(const vector<double> &targetValues,const double &eta ,
 
     //------- Calculate hidden layer gradients
   	for(unsigned layerNumber = layers.size() -2; layerNumber >0 ; layerNumber--){
-		Layer &hiddenLayer = layers[layerNumber];	
-		Layer &nextLayer = layers[layerNumber+1];	
-		
+		Layer &hiddenLayer = layers[layerNumber];
+		Layer &nextLayer = layers[layerNumber+1];
+
 		for(unsigned n = 0; n < hiddenLayer.size(); n++){
 			hiddenLayer[n].calculateHiddenGradients(nextLayer);
   		}
@@ -81,10 +81,10 @@ void Net::backPropagation(const vector<double> &targetValues,const double &eta ,
     //------- For all layers from outputs to first hidden layer,
     //------- update connection weights
   	for(unsigned layerNumber = layers.size() -1; layerNumber >0 ; layerNumber--){
-		Layer &layer = layers[layerNumber];	
-		Layer &prevLayer = layers[layerNumber-1];	
+		Layer &layer = layers[layerNumber];
+		Layer &prevLayer = layers[layerNumber-1];
 
-		for(unsigned n = 0; n < layer.size() -1; n++){ 		
+		for(unsigned n = 0; n < layer.size() -1; n++){
 			layer[n].updateInputWeights(prevLayer,eta,alpha);
 		}
   	}
@@ -99,6 +99,6 @@ void Net::getResults(vector<double> &resultValues) const{
     }
 }
 
-double Net::getRecentAverageError(void) const { 
-	return recentAverageError; 
+double Net::getRecentAverageError(void) const {
+	return recentAverageError;
 }
