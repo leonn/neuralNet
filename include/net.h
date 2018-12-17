@@ -10,9 +10,8 @@
 using namespace std;
 
 class Net{
-
-	double error;
-	double recentAverageError;
+	long double error;
+	long double recentAverageError;
 	vector<Layer> layers ;// layers[layerNumber][neuronNumber]
 
 public:
@@ -23,12 +22,11 @@ public:
 	void feedForward(const vector<double> &inputValues);
 
 	// backPropagation learning
-	void backPropagation(const vector<double> &targetValues,const double &eta ,const double &alpha);
+	void backPropagation(const vector<double> &targetValues,const long double &eta ,const long double &alpha);
 
 	void getResults(vector<double> &resultValues) const;
 
-	double getRecentAverageError() const;
-
+	long double getRecentAverageError() const;
 };
 
 #endif

@@ -1,6 +1,5 @@
 #include "net.h"
 
-
 Net::Net(const vector<unsigned> &topology,const string &transferFunction){
 	// size
  	unsigned numberOfLayers = topology.size();
@@ -25,7 +24,6 @@ Net::Net(const vector<unsigned> &topology,const string &transferFunction){
 
 //feedForward - operation to train the network
 void Net::feedForward(const vector<double> &inputValues){
-
 	assert(inputValues.size()==layers[0].size() - 1 && " the inputValues size needs to be the same of the first layer - bias");
 
 	for (unsigned i = 0; i < inputValues.size(); i++)	{
@@ -34,7 +32,7 @@ void Net::feedForward(const vector<double> &inputValues){
 
 	//forward propagation
  	//loop each layer and each neuron inside the layer
- 	for (unsigned layerNumber = 1; layerNumber < layers.size(); layerNumber++){
+ 	for (unsigned layerNumber = 1; layerNumber <= layers.size(); layerNumber++){
  		Layer &prevLayer = layers[layerNumber-1];
  		for (unsigned n = 0; n < layers[layerNumber].size(); n++){
  			layers[layerNumber][n].feedForward(prevLayer);
@@ -44,7 +42,7 @@ void Net::feedForward(const vector<double> &inputValues){
 }
 
 // backPropagation learning
-void Net::backPropagation(const vector<double> &targetValues,const double &eta ,const double &alpha){
+void Net::backPropagation(const vector<double> &targetValues,const long double &eta ,const long double &alpha){
 
 	//-----Calculate overall net error (RMS-root mean square error - of output neuron errors)
 	Layer &outputLayer = layers.back();
@@ -53,7 +51,7 @@ void Net::backPropagation(const vector<double> &targetValues,const double &eta ,
 	error=0.0;
 
  	for(unsigned n = 0; n < outputLayer.size() -1; n++){
- 		double delta= targetValues[n] - outputLayer[n].getOutputValue();
+ 		long double delta= targetValues[n] - outputLayer[n].getOutputValue();
  		error+=delta*delta;
  	}
  	error*=0.5;
@@ -99,6 +97,6 @@ void Net::getResults(vector<double> &resultValues) const{
     }
 }
 
-double Net::getRecentAverageError(void) const {
+long double Net::getRecentAverageError(void) const {
 	return recentAverageError;
 }

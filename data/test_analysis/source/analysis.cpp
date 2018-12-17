@@ -6,7 +6,7 @@
 
 using namespace std;
 
-double round(double f,double pres){
+long double round(long double f,long double pres){
         return (double) (floor(f*(1.0f/pres) + 0.5)/(1.0f/pres));
 }
 
@@ -22,7 +22,7 @@ int main(int argc, char const *argv[]){
 	 	string line;
 	    string label;
 	    int target;
-	    double output;
+	    long double output;
 
 	    getline(testFile, line);
 	    if (line.length()<2)

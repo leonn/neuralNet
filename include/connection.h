@@ -3,14 +3,14 @@
 #include <iostream>
 
 using namespace std;
-class Connection{ 
-	static double randomWeight(){
+class Connection{
+	static long double randomWeight(){
 		return rand()/double(RAND_MAX);
 	}
 
 public:
-	double weight;
-    double deltaWeight;
+	long double weight;
+    long double deltaWeight;
 
 	Connection();
 };

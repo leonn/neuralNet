@@ -1,7 +1,7 @@
-topology: 2 8 4 6
+topology: 2 4 4 6
 eta: 0.8
 momentum: 0.45
-transfer_function: sig
+transfer_function: th
 in: 753.0 1144454400000.0
 out: 02.0 07.0 22.0 35.0 43.0 59.0
 in: 1629.0 1408752000000.0

@@ -1,0 +1,12 @@
+Input: 0 1 
+Target_Output: 1 
+Output: -nan 
+Input: 1 0 
+Target_Output: 1 
+Output: -nan 
+Input: 1 1 
+Target_Output: 0 
+Output: -nan 
+Input: 0 0 
+Target_Output: 0 
+Output: -nan 

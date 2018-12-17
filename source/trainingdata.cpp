@@ -1,7 +1,7 @@
 #include "trainingdata.h"
 
 bool TrainingData::isEof(){
- return trainingDataFile.eof(); 
+    return trainingDataFile.eof();
 }
 
 void TrainingData::getTopology(vector<unsigned> &topology){
@@ -24,7 +24,7 @@ void TrainingData::getTopology(vector<unsigned> &topology){
     return;
 }
 
-void TrainingData::getEta(double &eta){
+void TrainingData::getEta(long double &eta){
     string line;
     string label;
 
@@ -56,7 +56,7 @@ void TrainingData::getTransferFunction(string &transferFunction){
     return;
 }
 
-void TrainingData::getMomentum(double &momentum){
+void TrainingData::getMomentum(long double &momentum){
     string line;
     string label;
 
@@ -84,9 +84,9 @@ unsigned TrainingData::getNextInputs(vector<double> &inputVals){
     stringstream ss(line);
 
     string label;
-    ss>> label;
+    ss >> label;
     if (label.compare("in:") == 0) {
-        double oneValue;
+        long double oneValue;
         while (ss >> oneValue) {
             inputVals.push_back(oneValue);
         }
@@ -105,7 +105,7 @@ unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputVals){
     string label;
     ss>> label;
     if (label.compare("out:") == 0) {
-        double oneValue;
+        long double oneValue;
         while (ss >> oneValue) {
             targetOutputVals.push_back(oneValue);
         }
